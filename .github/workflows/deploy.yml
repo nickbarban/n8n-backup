@@ -18,6 +18,11 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H 34.205.228.93 >> ~/.ssh/known_hosts
 
+      - name: Debug key fingerprint
+        run: |
+          ssh-keygen -y -f ~/.ssh/deploy_key > ~/.ssh/deploy_key.pub
+          ssh-keygen -lf ~/.ssh/deploy_key.pub
+
       - name: Deploy
         run: |
           ssh -i ~/.ssh/deploy_key ec2-user@34.205.228.93 '
