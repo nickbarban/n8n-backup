@@ -25,7 +25,9 @@ jobs:
 
       - name: Deploy
         run: |
+          scp -i ~/.ssh/deploy_key backup.sh ec2-user@34.205.228.93:/home/ec2-user/n8n-backup/backup.sh
           ssh -i ~/.ssh/deploy_key ec2-user@34.205.228.93 '
+            chmod +x /home/ec2-user/n8n-backup/backup.sh &&
             cd /opt/n8n &&
             docker-compose pull &&
             docker-compose up -d
